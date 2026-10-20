@@ -6,7 +6,7 @@
 <meta name="description" content="Gianna Dallape — photographer, filmmaker, content creator and community manager. Fashion, gastronomy, travel, film and AI imagery.">
 <meta property="og:title" content="Gianna Dallape">
 <meta property="og:description" content="Photographer, filmmaker, content creator and community manager.">
-<meta property="og:image" content="img/1wFpwpF54AhI9zAgvDpjAqePwPobwlnnG.jpg">
+<meta property="og:image" content="https://giannadallape.com/img/1wFpwpF54AhI9zAgvDpjAqePwPobwlnnG.jpg">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Gianna Dallape — Photographer & Filmmaker</title>
 </head>
@@ -522,6 +522,7 @@ footer > :nth-child(2){text-align:center}footer > :nth-child(3){text-align:right
       <button class="cta copy" type="button" id="copyBtn"><span class="dot"></span><span id="copyTxt" data-i18n="copy">Copy address</span></button>
     </div>
     <form class="brief" id="brief" novalidate>
+      <input type="text" name="_honey" id="f-honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <div class="field"><label class="micro" for="f-name" data-i18n="fName">Name / Brand</label><input id="f-name" name="name" autocomplete="organization" required></div>
       <div class="field"><label class="micro" for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><span class="micro" style="color:var(--ink-soft)" data-i18n="fNeed">What do you need</span>
@@ -529,7 +530,7 @@ footer > :nth-child(2){text-align:center}footer > :nth-child(3){text-align:right
       </div>
       <div class="field"><label class="micro" for="f-msg" data-i18n="fMsg">Tell her about the project</label><textarea id="f-msg" name="msg" rows="3"></textarea></div>
       <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
-        <button class="cta" type="submit"><span class="dot"></span><span data-i18n="fSend">Prepare my brief</span></button>
+        <button class="cta" type="submit"><span class="dot"></span><span data-i18n="fSend">Send my brief</span></button>
         <span class="micro sent" id="sent" aria-live="polite"></span>
       </div>
     </form>
@@ -611,7 +612,7 @@ const T = {
   aBehindK:"Behind",aBehindH:"Photographer & filmmaker",aBehindP:"She started studying photography at 15, specialised in fashion, then studied Audiovisual Arts at UNA. Since 2021 she has worked across strategy, photography, video, advertising, content planning and community management.",
   sEyebrow:"Services",sTitle:"What she makes",sRight:"Click to open",pEyebrow:"Process",pTitle:"From brief to feed",pRight:"4 steps",
   cEyebrow:"Contact",cTitle:"Let's create <span class=\"it\">together.</span>",cRight:"Reply within 48h",copy:"Copy address",copied:"Copied",
-  fName:"Name / Brand",fNeed:"What do you need",fMsg:"Tell her about the project",fSend:"Prepare my brief",fOk:"Brief ready. Send it to the address on the left.",fErr:"Add your name and a valid email.",
+  fName:"Name / Brand",fNeed:"What do you need",fMsg:"Tell her about the project",fSend:"Send my brief",fOk:"Sent. Gianna will get back to you within 48h.",fErr:"Add your name and a valid email.",fSending:"Sending…",fFail:"Sending failed. Write to dallapegia@gmail.com directly.",
   fMid:"Photography · Video · Content · Social · Digital image",fTop:"Back to top ↑",close:"Close ✕",view:"(View)",play:"(Play)",
   hsTitle:'Frames <span class="it">in motion</span>',smEyebrow:"Social media",smTitle:"Content <span class=\"it\">that performs</span>",smRight:"3 projects",sm1K:"Vegetarian burger restaurant",sm1H:"Fun content",sm2K:"Social pub, cultural & artistic",sm2H:"Artist biography content",sm3K:"Companies",sm3H:"Viral TikTok content",watch:"Watch ↗",baK:"Before / after",baP:"Instagram story views for a burger restaurant client, before and after her content.",baB:"Before",baA:"After",cats:{fashion:"Fashion",gastronomia:"Gastronomy",lifestyle:"Lifestyle & travel",film:"Film",ai:"AI",artistas:"Artists"}},
  es:{nWork:"Trabajo",nServices:"Servicios",nAbout:"Sobre mí",nContact:"Contacto",hMid:"Fotógrafa, filmmaker, creadora de contenido\ny community manager. Desde 2021.",hBook:"Agenda abierta",
@@ -623,7 +624,7 @@ const T = {
   aBehindK:"Detrás",aBehindH:"Fotógrafa y filmmaker",aBehindP:"Empezó a estudiar fotografía a los 15, se especializó en moda y estudió Artes Audiovisuales en la UNA. Desde 2021 trabaja en estrategia, fotografía, vídeo, publicidad, planificación de contenido y community management.",
   sEyebrow:"Servicios",sTitle:"Lo que hace",sRight:"Pulsa para abrir",pEyebrow:"Proceso",pTitle:"Del brief al feed",pRight:"4 pasos",
   cEyebrow:"Contacto",cTitle:"Creemos <span class=\"it\">juntos.</span>",cRight:"Respuesta en 48h",copy:"Copiar dirección",copied:"Copiado",
-  fName:"Nombre / Marca",fNeed:"Qué necesitas",fMsg:"Cuéntale el proyecto",fSend:"Preparar mi brief",fOk:"Brief listo. Envíalo a la dirección de la izquierda.",fErr:"Añade tu nombre y un email válido.",
+  fName:"Nombre / Marca",fNeed:"Qué necesitas",fMsg:"Cuéntale el proyecto",fSend:"Enviar mi brief",fOk:"Enviado. Gianna te responderá en 48h.",fErr:"Añade tu nombre y un email válido.",fSending:"Enviando…",fFail:"No se pudo enviar. Escribe directamente a dallapegia@gmail.com.",
   fMid:"Fotografía · Vídeo · Contenido · Redes · Imagen digital",fTop:"Volver arriba ↑",close:"Cerrar ✕",view:"(Ver)",play:"(Play)",
   hsTitle:'Imágenes <span class="it">en movimiento</span>',smEyebrow:"Redes sociales",smTitle:"Contenido <span class=\"it\">que funciona</span>",smRight:"3 proyectos",sm1K:"Hamburguesería vegetariana",sm1H:"Contenido divertido",sm2K:"Pub social, cultural y artístico",sm2H:"Contenido biográfico de artistas",sm3K:"Empresas",sm3H:"Contenido viral en TikTok",watch:"Ver ↗",baK:"Antes / después",baP:"Visualizaciones de historias de Instagram para una hamburguesería, antes y después de su contenido.",baB:"Antes",baA:"Después",cats:{fashion:"Moda",gastronomia:"Gastronomía",lifestyle:"Lifestyle y viajes",film:"Cine",ai:"IA",artistas:"Artistas"}},
  fr:{nWork:"Travaux",nServices:"Services",nAbout:"À propos",nContact:"Contact",hMid:"Photographe, réalisatrice, créatrice de contenu\net community manager. Depuis 2021.",hBook:"Réservations ouvertes",
@@ -635,7 +636,7 @@ const T = {
   aBehindK:"Derrière",aBehindH:"Photographe & réalisatrice",aBehindP:"Elle commence la photo à 15 ans, se spécialise en mode, puis étudie les Arts audiovisuels à l'UNA. Depuis 2021, elle travaille la stratégie, la photo, la vidéo, la publicité, le planning de contenu et le community management.",
   sEyebrow:"Services",sTitle:"Ce qu'elle crée",sRight:"Cliquer pour ouvrir",pEyebrow:"Méthode",pTitle:"Du brief au feed",pRight:"4 étapes",
   cEyebrow:"Contact",cTitle:"Créons <span class=\"it\">ensemble.</span>",cRight:"Réponse sous 48h",copy:"Copier l'adresse",copied:"Copié",
-  fName:"Nom / Marque",fNeed:"Votre besoin",fMsg:"Parlez-lui du projet",fSend:"Préparer mon brief",fOk:"Brief prêt. Envoyez-le à l'adresse à gauche.",fErr:"Ajoutez votre nom et un email valide.",
+  fName:"Nom / Marque",fNeed:"Votre besoin",fMsg:"Parlez-lui du projet",fSend:"Envoyer mon brief",fOk:"Envoyé. Gianna te répond sous 48h.",fErr:"Ajoute ton nom et un email valide.",fSending:"Envoi…",fFail:"L'envoi a échoué. Écris directement à dallapegia@gmail.com.",
   fMid:"Photo · Vidéo · Contenu · Social · Image digitale",fTop:"Haut de page ↑",close:"Fermer ✕",view:"(Voir)",play:"(Lire)",
   hsTitle:'Images <span class="it">en mouvement</span>',smEyebrow:"Réseaux sociaux",smTitle:"Du contenu <span class=\"it\">qui performe</span>",smRight:"3 projets",sm1K:"Restaurant de burgers végétariens",sm1H:"Contenu fun",sm2K:"Pub social, culturel & artistique",sm2H:"Contenu biographie d'artistes",sm3K:"Entreprises",sm3H:"Contenu TikTok viral",watch:"Voir ↗",baK:"Avant / après",baP:"Vues des stories Instagram d'un restaurant de burgers, avant et après son contenu.",baB:"Avant",baA:"Après",cats:{fashion:"Mode",gastronomia:"Gastronomie",lifestyle:"Lifestyle & voyage",film:"Film",ai:"IA",artistas:"Artistes"}}
 };
@@ -784,10 +785,24 @@ $("#copyBtn").addEventListener("click",async()=>{const txt=$("#mail").textConten
   try{await navigator.clipboard.writeText(txt);$("#copyTxt").textContent=T[lang].copied}
   catch(e){const r=document.createRange();r.selectNodeContents($("#mail"));const s=getSelection();s.removeAllRanges();s.addRange(r)}
   setTimeout(()=>$("#copyTxt").textContent=T[lang].copy,1800)});
-$("#brief").addEventListener("submit",e=>{e.preventDefault();
-  const n=$("#f-name").value.trim(),m=$("#f-email").value.trim();
+/* Contact form: sends to Gianna's inbox through FormSubmit (formsubmit.co), no backend needed */
+const FORM_ENDPOINT="https://formsubmit.co/ajax/dallapegia@gmail.com";
+$("#brief").addEventListener("submit",async e=>{e.preventDefault();
+  const n=$("#f-name").value.trim(),m=$("#f-email").value.trim(),msg=$("#f-msg").value.trim();
   if(!n||!/^\S+@\S+\.\S+$/.test(m)){$("#sent").textContent=T[lang].fErr;return}
-  $("#sent").textContent=T[lang].fOk});
+  if($("#f-honey").value)return;                       /* bots fill the hidden field */
+  const needs=[...document.querySelectorAll("#chips input:checked")].map(x=>x.nextElementSibling.textContent).join(", ")||"—";
+  const btn=e.submitter||$("#brief button[type=submit]");btn.disabled=true;$("#sent").textContent=T[lang].fSending;
+  try{
+    const r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({_subject:`Nouveau brief — ${n}`,_template:"table",_replyto:m,_captcha:"false",
+        "Nom / Marque":n,Email:m,Besoin:needs,Message:msg||"—",Langue:lang.toUpperCase()})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||String(j.success)==="false")throw new Error(j.message||r.status);
+    $("#brief").reset();$("#sent").textContent=T[lang].fOk;
+  }catch(err){$("#sent").textContent=T[lang].fFail}
+  finally{btn.disabled=false}
+});
 
 try{const s=localStorage.getItem("gd-lang");if(s&&T[s])lang=s}catch(e){}
 $("#yr").textContent=new Date().getFullYear();
