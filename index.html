@@ -118,7 +118,16 @@ nav.main a:hover::after{right:0}
 .overprint p{margin:0;color:var(--red);font-weight:600;font-stretch:84%;text-transform:uppercase;letter-spacing:-.01em;line-height:.98;font-size:clamp(17px,2.55vw,40px);text-align:justify;text-align-last:left;hyphens:none}
 .overprint p .gap{display:inline-block;width:2.4em}
 .split-foot{display:flex;justify-content:space-between;gap:16px;margin-top:12px;color:var(--ink-soft)}
-@media (max-width:640px){.split{grid-template-columns:1fr 1.3fr}.overprint p{font-size:clamp(14px,4.4vw,22px)}}
+@media (max-width:640px){
+  .split{grid-template-columns:1fr}
+  .split .plate:first-child{display:none}                 /* one full-width photo on phones */
+  .man-stick .split .plate{translate:none!important}
+  .overprint .cities.micro{font-size:clamp(15px,4.6vw,22px)}
+  .overprint p{font-size:clamp(17px,5.6vw,26px);line-height:1.02;text-align:left}
+  .overprint p .gap{width:.6em}
+  .man-stick .overprint{padding-top:clamp(40px,8vh,72px);padding-left:calc(var(--gx) + 12px);padding-right:calc(var(--gr) + 12px)}
+  .man-stick .split-foot{gap:8px}
+}
 
 /* ---------- section heads ---------- */
 .sect{margin-top:clamp(90px,12vw,170px)}
@@ -960,8 +969,9 @@ const FX=(function(){
         const span=Math.max(1,r.height-(H-52));
         const mp=Math.max(0,Math.min(1,(52-r.top)/span));            // 0 → 1 while pinned
         const pls=man.querySelectorAll(".split .plate");
-        if(pls[0]){pls[0].style.translate=`0 ${(mp-.5)*-40}px`;const im=pls[0].querySelector("img");if(im)im.style.transform=`scale(${1.12-mp*.12})`}
-        if(pls[1]){pls[1].style.translate=`0 ${(mp-.5)*30}px`;const im=pls[1].querySelector("img");if(im)im.style.transform=`scale(${1+mp*.1})`}
+        const narrow=innerWidth<=640;
+        if(pls[0]&&!narrow){pls[0].style.translate=`0 ${(mp-.5)*-40}px`;const im=pls[0].querySelector("img");if(im)im.style.transform=`scale(${1.12-mp*.12})`}
+        if(pls[1]&&!narrow){pls[1].style.translate=`0 ${(mp-.5)*30}px`;const im=pls[1].querySelector("img");if(im)im.style.transform=`scale(${1+mp*.1})`}
         man.style.setProperty("--mp",mp.toFixed(4));
         man.querySelectorAll(".cities span").forEach((c,k)=>c.style.setProperty("--c",Math.max(0,Math.min(1,(mp-k*.035)/.06)).toFixed(3)));
         const lit=Math.max(0,Math.min(1,(mp-.16)/.68))*(words.length+2);
