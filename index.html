@@ -1027,7 +1027,7 @@ function intro(force){
   let seen=false;try{seen=sessionStorage.getItem("gd-intro")==="1"}catch(e){}
   if(!force&&(seen||matchMedia("(prefers-reduced-motion: reduce)").matches))return;
   const root=document.documentElement;root.style.scrollBehavior="auto";scrollTo({top:0,left:0,behavior:"instant"});root.classList.add("is-intro");HERO.reset();const hpl0=document.querySelector(".hero-plate");if(hpl0){hpl0.style.transform="";const im0=hpl0.querySelector("img");if(im0)im0.style.transform=""}requestAnimationFrame(()=>root.style.scrollBehavior="");
-  const seq=["pdf-019","pdf-001","15OE44PD6YsHbzUTwZpBrTAnAI0y3R7KU","pdf-011","1MiPeFBOkJl82UpNuu0h8D2A5gmoCCzrf","pdf-003","pdf-017","1kWPu_Hw-2oXSwOFZcH1Gzncy0ZRV5t6h","portrait-orange","1fqXOk3XlgR7K2HZKIHfnMnqihDKt4uGC",FEATURE.hero];
+  const seq=["pdf-019","concert-sax","15OE44PD6YsHbzUTwZpBrTAnAI0y3R7KU","pdf-011","1MiPeFBOkJl82UpNuu0h8D2A5gmoCCzrf","concert-guitars","pdf-017","1kWPu_Hw-2oXSwOFZcH1Gzncy0ZRV5t6h","portrait-orange","1fqXOk3XlgR7K2HZKIHfnMnqihDKt4uGC",FEATURE.hero];
   const el=document.createElement("div");el.className="intro";el.setAttribute("aria-hidden","true");
   el.innerHTML=`<div class="ui"><div class="row micro"><span>Gianna Dallape<br>Photography / Video / Content</span><span></span></div><div></div>
     <div class="row" style="align-items:flex-end"><span class="micro" id="iCat">(Index)</span><div class="count"><span>0</span>00</div></div></div>
