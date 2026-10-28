@@ -233,6 +233,14 @@ footer > :nth-child(2){text-align:center}footer > :nth-child(3){text-align:right
 .signature .in i + i{color:var(--red)}
 .signature .l.on .in{transform:translateY(-.9em)}
 .signature .dot .in i{color:var(--red)}
+.credits{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.credits a{display:inline-flex;align-items:center;gap:8px;transition:color .25s}
+.credits a:hover{color:var(--red)}
+.credits .ig svg{display:block;transition:transform .35s cubic-bezier(.2,.8,.1,1)}
+.credits .ig:hover svg{transform:rotate(-8deg) scale(1.12)}
+.credits .madeby{color:var(--ink-soft)}
+.credits .madeby span{color:var(--ink)}
+.credits .madeby:hover span{color:var(--red)}
 
 /* ---------- lightbox ---------- */
 .lb[hidden]{display:none!important}
@@ -552,6 +560,10 @@ footer > :nth-child(2){text-align:center}footer > :nth-child(3){text-align:right
   <div data-i18n="fMid">Photography · Video · Content · Social · Digital image</div>
   <div><button type="button" id="replay" class="micro" style="margin-right:14px">Replay intro ↺</button><a href="#top" data-i18n="fTop">Back to top ↑</a></div>
   <div class="signature" id="sig" style="grid-column:1/-1" aria-hidden="true"></div>
+  <div class="credits">
+    <a class="ig" href="https://www.instagram.com/giannadallape/" target="_blank" rel="noopener" aria-label="Instagram @giannadallape"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg><span>@giannadallape</span></a>
+    <a class="madeby" href="https://www.instagram.com/timmyname/" target="_blank" rel="noopener">Made by <span>@timmyname</span></a>
+  </div>
 </footer>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
