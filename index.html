@@ -253,6 +253,51 @@ form.brief{display:flex;flex-direction:column;gap:16px;min-width:0}
 .lb .n{font-variant-numeric:tabular-nums}
 
 
+/* ---------- mobile ---------- */
+.burger{display:none;width:44px;height:44px;margin-right:-10px;place-items:center;position:relative}
+.burger i{position:absolute;left:12px;right:12px;height:1.5px;background:var(--ink);transition:transform .35s var(--ease),top .35s var(--ease)}
+.burger i:nth-child(1){top:18px}.burger i:nth-child(2){top:25px}
+.menu-open .burger i:nth-child(1){top:21.5px;transform:rotate(45deg)}
+.menu-open .burger i:nth-child(2){top:21.5px;transform:rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:39;background:var(--paper);display:flex;flex-direction:column;justify-content:space-between;
+  padding:calc(env(safe-area-inset-top,0px) + var(--bar) + 18px) var(--gr) calc(env(safe-area-inset-bottom,0px) + 24px) var(--gx);
+  clip-path:inset(0 0 100% 0);transition:clip-path .55s var(--ease);visibility:hidden}
+.menu-open .mnav{clip-path:inset(0 0 0 0);visibility:visible}
+.menu-open body{overflow:hidden}
+.mnav ol{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+.mnav li{border-bottom:1px solid var(--rule)}
+.mnav a.big{display:flex;align-items:baseline;gap:12px;padding-block:12px;font-weight:700;font-stretch:72%;text-transform:uppercase;letter-spacing:-.03em;line-height:.9;font-size:clamp(40px,12vw,64px)}
+.mnav a.big .no{font-family:var(--mono);font-size:11px;font-weight:400;font-stretch:100%;letter-spacing:.05em;color:var(--red)}
+.mnav li{opacity:0;transform:translateY(16px);transition:opacity .4s,transform .5s var(--ease)}
+.menu-open .mnav li{opacity:1;transform:none}
+.menu-open .mnav li:nth-child(2){transition-delay:.05s}.menu-open .mnav li:nth-child(3){transition-delay:.1s}.menu-open .mnav li:nth-child(4){transition-delay:.15s}.menu-open .mnav li:nth-child(5){transition-delay:.2s}
+.mnav .foot{display:flex;flex-direction:column;gap:10px}
+.mnav .foot .mail{font-size:22px;font-weight:600;font-stretch:80%;letter-spacing:-.02em}
+.fab{position:fixed;z-index:30;right:calc(var(--gr) + 0px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:none;align-items:center;gap:10px;background:var(--ink);color:var(--paper);
+  padding:14px 20px;border-radius:999px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;box-shadow:0 8px 28px rgba(18,18,18,.22);
+  transform:translateY(140%);transition:transform .45s var(--ease)}
+.fab .dot{width:7px;height:7px;border-radius:50%;background:var(--red)}
+.fab.show{transform:none}
+.chead .swipe{display:none}
+@media (max-width:760px){
+  .burger{display:grid}
+  .lang button{padding:10px 9px;min-width:40px}
+  .fab{display:inline-flex}
+  .finder .frame{aspect-ratio:auto;height:min(92vw,50svh)}
+  .shot .ph{height:clamp(260px,52svh,460px)}
+  .chead .swipe{display:inline}
+  .chead .tools>span:first-child{display:none}
+  .social{gap:28px}
+  .phones{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:calc(var(--gx) * -1) calc(var(--gr) * -1);padding-inline:var(--gx) var(--gr);scroll-padding-left:var(--gx);scrollbar-width:none}
+  .phones::-webkit-scrollbar{display:none}
+  .phone-card{flex:0 0 46vw;scroll-snap-align:start}
+  .phone-card:nth-child(2){margin-top:0}
+  .credits{flex-direction:column;align-items:flex-start}
+  .credits a,.credits .replay{padding-block:6px}
+  .band .wrap{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 28px)}
+}
+@media (hover:none){.shot:hover .ph img,html.anim .shot[data-r="clip"].in:hover img{transform:none}.phone-card:hover .phone{transform:none}}
+
 /* ---------- intro (kept from v1): counter + photo flicker, last frame flies into the viewfinder ---------- */
 .is-intro body{overflow:hidden}
 .is-intro header.top,.is-intro .hero,.is-intro .hero *,.is-intro .ticker{animation-play-state:paused!important}
@@ -336,9 +381,26 @@ html.anim .statement .gap{transition:opacity .35s}
       <button type="button" data-lang="en" aria-pressed="true">EN</button>
       <button type="button" data-lang="es" aria-pressed="false">ES</button>
       <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><i></i><i></i></button>
     </div>
   </div>
 </header>
+
+<nav class="mnav" id="mnav" aria-label="Menu">
+  <ol>
+    <li><a class="big" href="#work"><span class="no">01</span><span data-i18n="nWork">Work</span></a></li>
+    <li><a class="big" href="#about"><span class="no">02</span><span data-i18n="nAbout">About</span></a></li>
+    <li><a class="big" href="#services"><span class="no">03</span><span data-i18n="nServices">Services</span></a></li>
+    <li><a class="big" href="#social"><span class="no">04</span><span>Social</span></a></li>
+    <li><a class="big" href="#contact"><span class="no">05</span><span data-i18n="nContact">Contact</span></a></li>
+  </ol>
+  <div class="foot">
+    <span class="mail">dallapegia@gmail.com</span>
+    <div class="micro soft">Barcelona · +34 664 265 622</div>
+    <div class="links micro" style="display:flex;gap:18px"><a href="https://www.instagram.com/giannadallape/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.linkedin.com/in/giannadallape/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+  </div>
+</nav>
+<a class="fab" id="fab" href="#contact"><span class="dot"></span><span data-i18n="ctaBook">Start a project</span></a>
 
 <main id="top">
 <section class="hero wrap">
@@ -571,9 +633,9 @@ const STEPS = {
 
 /* extra strings for the 2.0 layout */
 const X={
- en:{xWork:'The work, <span class="it">in chapters</span>',frames:"frames",film:"Play film",vfail:"The film plays on the live site, giannadallape.com."},
- es:{xWork:'El trabajo, <span class="it">por capítulos</span>',frames:"imágenes",film:"Ver película",vfail:"La película se reproduce en la web, giannadallape.com."},
- fr:{xWork:'Le travail, <span class="it">en chapitres</span>',frames:"images",film:"Lire le film",vfail:"Le film se lit sur le site en ligne, giannadallape.com."}
+ en:{xWork:'The work, <span class="it">in chapters</span>',frames:"frames",film:"Play film",swipe:"swipe →",vfail:"The film plays on the live site, giannadallape.com."},
+ es:{xWork:'El trabajo, <span class="it">por capítulos</span>',frames:"imágenes",film:"Ver película",swipe:"desliza →",vfail:"La película se reproduce en la web, giannadallape.com."},
+ fr:{xWork:'Le travail, <span class="it">en chapitres</span>',frames:"images",film:"Lire le film",swipe:"glisse →",vfail:"Le film se lit sur le site en ligne, giannadallape.com."}
 };
 const ORDER=["fashion","gastronomia","lifestyle","film","concierto","artistas","ai"];
 const FINDER=["1wFpwpF54AhI9zAgvDpjAqePwPobwlnnG","concert-red","15OE44PD6YsHbzUTwZpBrTAnAI0y3R7KU","pdf-019","1fqXOk3XlgR7K2HZKIHfnMnqihDKt4uGC","concert-sax","portrait-orange","pdf-022","1MiPeFBOkJl82UpNuu0h8D2A5gmoCCzrf"];
@@ -588,7 +650,7 @@ function applyText(){
   document.documentElement.lang=lang;
   document.querySelectorAll("[data-i18n]").forEach(e=>{const v=tx(e.dataset.i18n);if(v!==undefined)e.textContent=v});
   document.querySelectorAll("[data-i18n-html]").forEach(e=>{const v=tx(e.dataset.i18nHtml);if(v!==undefined)e.innerHTML=v});
-  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
+  document.querySelectorAll(".lang button[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
   const en=lang==="en";$("#px").textContent=en?"×7.8":"×7,8";$("#pb").textContent=en?"1,477":lang==="es"?"1.477":"1 477";$("#pa").textContent=en?"11,540":lang==="es"?"11.540":"11 540";
   $("#count").textContent=`${LIST.length} ${tx("frames")} · ${ORDER.length} ${lang==="en"?"chapters":lang==="es"?"capítulos":"chapitres"}`;
 }
@@ -600,7 +662,7 @@ function renderChapters(){
     const items=WORK.filter(w=>w.c===c);
     return `<section class="chapter" id="ch-${c}">
       <div class="chead"><h3><span class="no">${pad(i+1)}</span>${T[lang].cats[c]}</h3>
-        <div class="tools micro"><span>${items.length} ${tx("frames")}</span><button type="button" data-dir="-1" aria-label="Previous">←</button><button type="button" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="tools micro"><span>${items.length} ${tx("frames")}</span><span class="swipe">${items.length} ${tx("frames")} · ${tx("swipe")}</span><button type="button" data-dir="-1" aria-label="Previous">←</button><button type="button" data-dir="1" aria-label="Next">→</button></div></div>
       <div class="strip">${items.map(w=>`<button type="button" class="shot" data-id="${w.id}">
         <span class="ph"><img src="${SRC(w.id)}" alt="${w.f}, ${T[lang].cats[c]}" loading="lazy">${w.v?`<span class="play micro">${tx("film")}</span>`:""}</span>
         <span class="cap micro"><b>${w.f}</b><span>GD</span></span></button>`).join("")}</div>
@@ -666,7 +728,7 @@ let tx0=null;$("#lbStage").addEventListener("touchstart",e=>{tx0=e.touches[0].cl
 $("#lbStage").addEventListener("touchend",e=>{if(tx0===null)return;const d=e.changedTouches[0].clientX-tx0;if(Math.abs(d)>50)step(d<0?1:-1);tx0=null});
 
 /* ----- language ----- */
-document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>{lang=b.dataset.lang;try{localStorage.setItem("gd-lang",lang)}catch(e){}renderAll()}));
+document.querySelectorAll(".lang button[data-lang]").forEach(b=>b.addEventListener("click",()=>{lang=b.dataset.lang;try{localStorage.setItem("gd-lang",lang)}catch(e){}renderAll()}));
 
 /* ----- copy email ----- */
 $("#copyBtn").addEventListener("click",async()=>{
@@ -740,6 +802,22 @@ if(MOTION){
 try{const s=localStorage.getItem("gd-lang");if(s&&T[s])lang=s}catch(e){}
 $("#yr").textContent=new Date().getFullYear();
 renderAll();
+
+/* ===== mobile: menu + floating contact button ===== */
+(function(){
+  const root=document.documentElement,btn=$("#burger"),nav=$("#mnav");
+  const set=o=>{root.classList.toggle("menu-open",o);btn.setAttribute("aria-expanded",String(o))};
+  btn.addEventListener("click",()=>set(!root.classList.contains("menu-open")));
+  nav.addEventListener("click",e=>{if(e.target.closest("a"))set(false)});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)});
+  addEventListener("resize",()=>{if(innerWidth>760)set(false)});
+  const fab=$("#fab"),hero=document.querySelector(".hero"),band=$("#contact");
+  let pastHero=false,atContact=false;const upd=()=>fab.classList.toggle("show",pastHero&&!atContact);
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>{pastHero=!es[0].isIntersecting;upd()}).observe(hero);
+    new IntersectionObserver(es=>{atContact=es[0].isIntersecting;upd()}).observe(band);
+  }
+})();
 
 /* ===== Intro (from v1): counter + photo flicker, last frame flies into the viewfinder ===== */
 function intro(force){
