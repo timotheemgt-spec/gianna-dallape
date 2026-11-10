@@ -253,6 +253,29 @@ form.brief{display:flex;flex-direction:column;gap:16px;min-width:0}
 .lb .n{font-variant-numeric:tabular-nums}
 
 
+/* ---------- intro (kept from v1): counter + photo flicker, last frame flies into the viewfinder ---------- */
+.is-intro body{overflow:hidden}
+.is-intro header.top,.is-intro .hero,.is-intro .hero *,.is-intro .ticker{animation-play-state:paused!important}
+.is-intro .finder .frame{visibility:hidden}
+.is-intro .hero-meta::before{animation-play-state:paused!important}
+html.flown .finder .frame{animation:none!important}
+.intro{position:fixed;inset:0;z-index:95;background:var(--paper);color:var(--ink);transition:background .7s ease .2s}
+.intro.out{background:transparent;pointer-events:none}
+.intro .ui{position:absolute;inset:0;padding:calc(env(safe-area-inset-top,0px) + 18px) var(--gr) calc(env(safe-area-inset-bottom,0px) + 18px) var(--gx);display:grid;grid-template-rows:auto 1fr auto;transition:opacity .4s}
+.intro.out .ui{opacity:0}
+.intro .row{display:flex;justify-content:space-between;gap:16px}
+.intro .count{font-weight:300;font-stretch:62%;font-size:clamp(72px,14vw,200px);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.intro .count span{color:var(--red)}
+.intro .ibar{position:absolute;left:0;bottom:0;height:2px;background:var(--red);width:0}
+.intro .iframe{position:fixed;left:50%;top:50%;width:clamp(150px,19vw,280px);aspect-ratio:4/5;transform:translate(-50%,-50%);overflow:hidden;background:var(--wall);will-change:left,top,width,height}
+.intro .iframe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.intro .iframe.fly{transition:left 1s cubic-bezier(.76,0,.24,1),top 1s cubic-bezier(.76,0,.24,1),width 1s cubic-bezier(.76,0,.24,1),height 1s cubic-bezier(.76,0,.24,1),transform 1s cubic-bezier(.76,0,.24,1)}
+.intro .label{position:fixed;left:50%;top:calc(50% + clamp(150px,19vw,280px)*.625 + 14px);transform:translateX(-50%);white-space:nowrap}
+.intro .skip{position:absolute;right:var(--gr);top:calc(env(safe-area-inset-top,0px) + 18px)}
+.intro .skip:hover{color:var(--red)}
+.credits .replay{font:inherit;color:var(--on-ink-soft);text-transform:inherit;letter-spacing:inherit;margin-right:14px}
+.credits .replay:hover{color:var(--red)}
+
 /* ---------- motion (only when JS adds html.anim; reduced-motion viewers never get hidden states) ---------- */
 @keyframes rise{to{transform:none}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
@@ -263,7 +286,7 @@ form.brief{display:flex;flex-direction:column;gap:16px;min-width:0}
 @keyframes cornerIn{from{opacity:0;translate:var(--cx) var(--cy)}to{opacity:1;translate:0 0}}
 :root{--ease:cubic-bezier(.2,.8,.1,1)}
 h1.name .ln,.endname .ln{display:block;clip-path:inset(-25% -10% 0 -10%)}
-h1.name span.c,.endname span.c{display:inline-block}
+h1.name .c,.endname .c{display:inline-block}
 html.anim header.top{animation:fadeDown .7s var(--ease) both}
 html.anim h1.name .c{transform:translateY(110%);animation:rise 1s var(--ease) forwards;animation-delay:calc(var(--d) * 45ms + 120ms)}
 html.anim h1.name b.c{transform:scale(0);transform-origin:50% 80%;animation:pop .6s var(--ease) forwards;animation-delay:1.05s}
@@ -440,7 +463,7 @@ html.anim .statement .gap{transition:opacity .35s}
     <div class="credits micro">
       <span>© <span id="yr">2026</span> Gianna Dallape · <span data-i18n="fMid"></span></span>
       <a href="https://www.instagram.com/timmyname/" target="_blank" rel="noopener">Made by @timmyname</a>
-      <a href="#top" data-i18n="fTop">Back to top ↑</a>
+      <span><button type="button" class="replay" id="replay">Replay intro ↺</button><a href="#top" data-i18n="fTop">Back to top ↑</a></span>
     </div>
   </div>
 </section>
@@ -611,7 +634,7 @@ function finderShow(i,first){
   if(next.complete&&next.naturalWidth)swap();else{next.onload=swap}
 }
 finderShow(0,true);
-if(!matchMedia("(prefers-reduced-motion:reduce)").matches){fTimer=setInterval(()=>{if(!document.hidden&&$("#lb").hidden)finderShow(fi+1)},3400)}
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches){fTimer=setInterval(()=>{if(!document.hidden&&$("#lb").hidden&&!document.documentElement.classList.contains("is-intro"))finderShow(fi+1)},3400)}
 $("#finder").addEventListener("click",()=>openLb(FINDER[fi]));
 
 /* ----- strips ----- */
@@ -717,6 +740,51 @@ if(MOTION){
 try{const s=localStorage.getItem("gd-lang");if(s&&T[s])lang=s}catch(e){}
 $("#yr").textContent=new Date().getFullYear();
 renderAll();
+
+/* ===== Intro (from v1): counter + photo flicker, last frame flies into the viewfinder ===== */
+function intro(force){
+  let seen=false;try{seen=sessionStorage.getItem("gd-intro")==="1"}catch(e){}
+  if(!force&&(seen||matchMedia("(prefers-reduced-motion: reduce)").matches))return;
+  const root=document.documentElement;root.style.scrollBehavior="auto";scrollTo({top:0,left:0,behavior:"instant"});root.classList.add("is-intro");requestAnimationFrame(()=>root.style.scrollBehavior="");
+  const last=FINDER[fi];
+  const seq=["pdf-019","concert-sax","15OE44PD6YsHbzUTwZpBrTAnAI0y3R7KU","pdf-011","1MiPeFBOkJl82UpNuu0h8D2A5gmoCCzrf","concert-guitars","pdf-017","1kWPu_Hw-2oXSwOFZcH1Gzncy0ZRV5t6h","portrait-orange","1fqXOk3XlgR7K2HZKIHfnMnqihDKt4uGC",last];
+  const el=document.createElement("div");el.className="intro";el.setAttribute("aria-hidden","true");
+  el.innerHTML=`<div class="ui"><div class="row micro"><span>Gianna Dallape<br>Photography / Video / Content</span><span></span></div><div></div>
+    <div class="row" style="align-items:flex-end"><span class="micro" id="iCat">(Index)</span><div class="count"><span>0</span>00</div></div></div>
+    <button type="button" class="skip micro" id="iSkip">Skip →</button>
+    <div class="iframe" id="iFrame"></div><div class="label micro" id="iLabel"></div><div class="ibar" id="iBar"></div>`;
+  document.body.appendChild(el);
+  const frame=el.querySelector("#iFrame"),count=el.querySelector(".count"),bar=el.querySelector("#iBar"),lab=el.querySelector("#iLabel"),cat=el.querySelector("#iCat");
+  const imgs=seq.map(id=>{const i=new Image();i.src=SRC(id);i.alt="";return i});
+  let done=false,t0=performance.now();const DUR=2400;
+  function setCount(v){const n=String(v).padStart(3,"0");count.innerHTML=`<span>${n[0]}</span>${n.slice(1)}`;bar.style.width=v+"%"}
+  function tick(now){
+    if(done)return;const p=Math.min(1,(now-t0)/DUR);const e=1-Math.pow(1-p,3);
+    setCount(Math.round(e*100));
+    const k=Math.min(seq.length-1,Math.floor(e*seq.length));
+    if(frame.dataset.k!=k){frame.dataset.k=k;frame.replaceChildren(imgs[k]);const w=WORK.find(x=>x.id===seq[k]);
+      lab.textContent=w?`${w.f} — (${T[lang].cats[w.c]})`:"";cat.textContent=w?`(${T[lang].cats[w.c]})`:"(Index)";}
+    if(p<1)requestAnimationFrame(tick);else setTimeout(fly,250);
+  }
+  function fly(){
+    if(done)return;done=true;lab.textContent="";
+    root.classList.add("flown");
+    const target=$("#finder").getBoundingClientRect();
+    const r=frame.getBoundingClientRect();
+    frame.style.transform="none";frame.style.left=r.left+"px";frame.style.top=r.top+"px";frame.style.width=r.width+"px";frame.style.height=r.height+"px";
+    frame.offsetWidth;frame.classList.add("fly");
+    frame.style.left=target.left+"px";frame.style.top=target.top+"px";frame.style.width=target.width+"px";frame.style.height=target.height+"px";
+    const img=frame.querySelector("img"),w=WORK.find(x=>x.id===last);if(img)img.style.objectPosition=(w&&w.pos)||"50% 50%";
+    el.classList.add("out");
+    setTimeout(()=>root.classList.remove("is-intro"),900);
+    setTimeout(finish,1150);
+  }
+  function finish(){root.classList.remove("is-intro");el.remove();try{sessionStorage.setItem("gd-intro","1")}catch(e){}}
+  el.querySelector("#iSkip").addEventListener("click",()=>{if(!done){setCount(100);frame.replaceChildren(imgs[imgs.length-1]);fly()}});
+  requestAnimationFrame(tick);
+}
+intro(false);
+$("#replay").addEventListener("click",()=>intro(true));
 </script>
 </body>
 </html>
